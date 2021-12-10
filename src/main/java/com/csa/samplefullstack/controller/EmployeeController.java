@@ -3,9 +3,8 @@ package com.csa.samplefullstack.controller;
 import com.csa.samplefullstack.entity.employee;
 import com.csa.samplefullstack.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -20,4 +19,20 @@ public class EmployeeController {
     public List<employee> getAllEmployees(){
         return employeeRepository.findAll();
     }
+
+    @PostMapping("/employees")
+    public employee postEmployee(@RequestBody employee employee){
+        return employeeRepository.save(employee);
+    }
+
+    @GetMapping("/employees/{id}")
+    public employee getEmployeeFromId(@PathVariable Long id){
+        return employeeRepository.findById(id).get();
+    }
+
+    @PutMapping("/employees")
+    public employee putEmployee(@RequestBody employee employee){
+        return employeeRepository.save(employee);
+    }
+
 }
