@@ -3,6 +3,8 @@ package com.csa.samplefullstack.controller;
 import com.csa.samplefullstack.entity.employee;
 import com.csa.samplefullstack.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,4 +37,9 @@ public class EmployeeController {
         return employeeRepository.save(employee);
     }
 
+    @DeleteMapping("/employees/{id}")
+    public ResponseEntity<HttpStatus> deleteEmployeeFromId(@PathVariable Long id){
+        employeeRepository.deleteById(id);
+        return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+    }
 }
